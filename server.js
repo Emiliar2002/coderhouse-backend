@@ -7,6 +7,16 @@ const productos = new Contenedor('productos')
 
 const PORT = process.env.PORT || 3000
 
+app.get('/', (_req, res) => {
+    return res.status(200)
+    .send(`
+    <ul>
+        <a href="/productos"><li>Productos</li></a>
+        <a href="/productoRandom"><li>Producto random</li></a>
+        <a href="/productoRandom"><li>ping</li></a>
+    </ul>
+    `)
+})
 
 app.get('/productos', async (_req, res) => {
     const allProducts = await productos.getAll()
@@ -23,6 +33,11 @@ app.get('/productoRandom', async (_req, res) => {
     .send({
         productoRandom: productoRandom
     })
+})
+
+app.get('/ping', async (_req, res) => {
+    return res.status(200)
+    .send("<h1>PONG!</h1>")
 })
 
 app.listen(PORT, () => {
