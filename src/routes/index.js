@@ -1,11 +1,11 @@
 const {Router} = require('express')
 const router = Router()
 
-const productosRouter = require('./productos/productos.router')
+const indexApiRouter = require('./api/api.router');
+const rendersRouter = require('./renders/renders.router')
 
-require('dotenv').config()
-
-router.use('/productos', productosRouter)
+router.use('/api', indexApiRouter)
+router.use('/', rendersRouter)
 
 
 module.exports = router
