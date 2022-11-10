@@ -28,6 +28,9 @@ router.post("/", async (req, res) => {
       image,
       id,
     });
+    req.io.sockets.emit('GET_PRODUCTS', ({
+      name, image, id
+    }))
     return res.status(200).send({
       success: `Producto "${name}" creado con el id ${id}!`,
     });
