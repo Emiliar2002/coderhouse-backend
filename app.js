@@ -1,36 +1,43 @@
-const express = require("express");
-const { Server } = require("socket.io");
 require("dotenv").config();
-const indexRouter = require("./src/routes/index");
+
+//modulos de node
 const _ = require("lodash");
 
-const PORT = process.env.PORT || 3000;
-
-const app = express();
+//modulos para el server
+const express = require("express");
 const http = require("http");
-const server = http.createServer(app);
+const { Server } = require("socket.io");
 
+//creacion del server
+const app = express();
+const server = http.createServer(app);
 const io = new Server(server);
 
-const fs = require("fs");
+//traigo el router
+const indexRouter = require("./src/routes/index");
+
+//traigo middlewares
 const errorHandler = require("./src/middlewares/errorHandler");
 
+//aplico middlewares
 app.use((req, res, next) => {
   req.io = io;
   next();
 });
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("./src/public"));
+app.use("/", indexRouter);
+app.use(errorHandler);
 
+//seteo view engine y carpeta de views
 app.set("views", "./views/pages");
 app.set("view engine", "ejs");
 
-app.use("/", indexRouter);
 
-app.use(errorHandler);
 
+
+//configuracion de los sockets
 const MessagesService = require("./src/services/messages/messages.services");
 const messagesService = new MessagesService();
 
@@ -50,6 +57,6 @@ io.on("connection", async (socket) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.info(`Server listening on port ${PORT}`);
-});
+
+
+module.exports = server
