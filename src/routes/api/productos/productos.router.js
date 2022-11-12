@@ -1,108 +1,77 @@
 const { Router } = require("express");
 const router = Router();
-const productos = require('./productosArray')
+const _ = require("lodash");
+const { v4: uuidv4 } = require("uuid");
+const ProductService = require("../../../services/products/products.services");
 
+const productService = new ProductService();
 
-router.get("/", (_req, res) => {
+router.get("/", async (_req, res) => {
   try {
-    return res.status(200).send({ productos });
+    const data = await productService.getProducts();
+    if (!data.success) res.status(500).json(data);
+    return res.status(200).json(data);
   } catch (err) {
-    return res.status(400).send({
-      error: err.message,
-    });
+    next(err);
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
-    console.log(req.body)
-    const { name, image } = req.body;
-    if (!name || !image) {
-      return res.status(400).send({
-        error: "Faltan nombre e imagen en el body.",
-      });
-    }
-    const id = productos[productos.length - 1].id + 1;
-    productos.push({
-      name,
-      image,
-      id,
+    const { body } = req;
+    if (_.isEmpty(body))
+      return res
+        .status(400)
+        .json({ success: false, message: "REQ ERROR (Body missing)" });
+    Object.assign(body, {
+      uuid: uuidv4(),
     });
-    req.io.sockets.emit('GET_PRODUCTS', ({
-      name, image, id
-    }))
-    return res.status(200).send({
-      success: `Producto "${name}" creado con el id ${id}!`,
+    const data = await productService.createProduct(body);
+    if (!data.success) return res.status(500).json(data);
+    req.io.sockets.emit("GET_PRODUCTS", {
+      ...body,
     });
+    res.status(200).json(data);
   } catch (err) {
-    return res.status(400).send({
-      error: err.message,
-    });
+    next(err);
   }
 });
 
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
+router.get("/:uuid", async (req, res, next) => {
+  const { uuid } = req.params;
   try {
-    const producto = productos.find((p) => {
-      return p.id == id;
-    });
-
-    if (!producto)
-      return res.status(400).send({ error: "Producto no encontrado." });
-
-    return res.status(200).send(producto);
+    if (_.isNil(uuid))
+      return res.status(400).json({ success: false, message: "Req error" });
+    const data = await productService.getProduct(uuid);
+    if (!data.success) return res.status(500).json(data);
+    res.status(200).json(data);
   } catch (err) {
-    return res.status(400).send({
-      error: err.message,
-    });
+    next(err);
   }
 });
 
-router.put("/:id", async (req, res) => {
-  const { id } = req.params;
-  const { name, image } = req.body;
+router.put("/:uuid", async (req, res, next) => {
+  const { uuid } = req.params;
+  const { body } = req;
   try {
-    const index = productos.findIndex((p) => {
-      if (p.id == id) return true;
-    });
-
-    if (index === -1)
-      return res.status(400).send({ error: "Producto no encontrado." });
-
-    productos[index].name = name ? name : productos[index].name;
-    productos[index].image = image ? image : productos[index].image;
-
-    return res.status(200).send({
-      success: "Producto actualizado.",
-    });
+    if (_.isNil(uuid)) return res.status(400).json({ success: false, message: "Req error" });
+    const data = await productService.updateProduct(uuid, body);
+    if (!data.success) res.status(500).json(data);
+    res.status(200).json(data);
   } catch (err) {
-    return res.status(400).send({
-      error: err.message,
-    });
+    next(err);
   }
 });
 
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
+router.delete("/:uuid", async (req, res, next) => {
+  const { uuid } = req.params;
   try {
-    const index = productos.findIndex((p) => {
-      if (p.id == id) return true;
-    });
-
-    if (index === -1)
-      return res.status(400).send({ error: "Producto no encontrado." });
-
-    productos.splice(index, 1)
-
-    return res.status(200).send({
-        success: "Producto eliminado.",
-      });
-
-  } catch (e) {
-    return res.status(400).send({
-      error: err.message,
-    });
+    if (_.isNil(uuid)) return res.status(400).json({ success: false, message: "Req error" });
+    const data = await productService.deleteProduct(uuid);
+    if (!data.success) res.status(500).json(data);
+    return res.status(200).json(data);
+  } catch (err) {
+    next(err);
   }
 });
 

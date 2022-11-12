@@ -1,65 +1,55 @@
-const express = require('express');
-require('dotenv').config()
-const indexRouter = require('./src/routes/index')
-
-const PORT = process.env.PORT || 3000
-
-const app = express()
-const http = require('http');
-const server = http.createServer(app);
+const express = require("express");
 const { Server } = require("socket.io");
-const io = new Server(server);
-const fs = require('fs')
-const moment = require('moment')
+require("dotenv").config();
+const indexRouter = require("./src/routes/index");
+const _ = require("lodash");
 
+const PORT = process.env.PORT || 3000;
+
+const app = express();
+const http = require("http");
+const server = http.createServer(app);
+
+const io = new Server(server);
+
+const fs = require("fs");
+const errorHandler = require("./src/middlewares/errorHandler");
 
 app.use((req, res, next) => {
-    req.io = io;
-    next();
-})
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
-app.use(express.static('./src/public'))
+  req.io = io;
+  next();
+});
 
-app.set('views', './views/pages');
-app.set('view engine', 'ejs')
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static("./src/public"));
 
+app.set("views", "./views/pages");
+app.set("view engine", "ejs");
 
-app.get('/health', (_req, res) => {
-    res.status(200).send({
-        success: true,
-        environment: process.env.ENV || 'undefined',
-        health: 'up'
-    })
-})
+app.use("/", indexRouter);
 
-app.use('/', indexRouter)
+app.use(errorHandler);
 
+const MessagesService = require("./src/services/messages/messages.services");
+const messagesService = new MessagesService();
 
+io.on("connection", async (socket) => {
+  const messages = await (await messagesService.getMessages()).data;
+  console.log("enviando mensajes a", socket.id);
+  messages.forEach((m) => {
+    socket.emit("NEW_MESSAGE_FROM_SERVER", m);
+  });
 
-io.on('connection', socket => {
+  socket.on("NEW_MESSAGE_TO_SERVER", async (message) => {
+    const { email, text } = message;
+    if (_.isNil(email) || _.isNil(text)) return;
 
-    
-        const messages = JSON.parse(fs.readFileSync('messages.json')).messages
-        console.log('enviando mensajes a', socket.id)
-        messages.forEach(m => {
-            socket.emit('PRINT_MESSAGE', m)
-        })
-
-
-    socket.on('new_message', (message) => {
-        const {email, text} = message
-        if(!email || !text) return
-        const date = moment().format('MMMM Do YYYY, h:mm:ss a');
-        message.date = date
-        io.sockets.emit('PRINT_MESSAGE', message)
-        const messages = JSON.parse(fs.readFileSync('messages.json'))
-        messages.messages.push(message)
-        const messagesStringified = JSON.stringify(messages)
-        fs.writeFileSync('messages.json', messagesStringified)
-    })
-})
+    await messagesService.createMessage(message);
+    io.sockets.emit("NEW_MESSAGE_FROM_SERVER", message);
+  });
+});
 
 server.listen(PORT, () => {
-    console.info(`Server listening on port ${PORT}`)
-})
+  console.info(`Server listening on port ${PORT}`);
+});

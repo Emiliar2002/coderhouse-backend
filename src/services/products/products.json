@@ -1,0 +1,27 @@
+[
+  {
+    "name": "plancho",
+    "price": 1000,
+    "uuid": "a3ebb16e-6ec6-434b-8532-5ee3d2e83960"
+  },
+  {
+    "name": "Plancha",
+    "price": 2000,
+    "uuid": "e6ef15ab-c771-4674-9fe3-5d6b767564ad"
+  },
+  {
+    "name": "planchardasda",
+    "price": 1000,
+    "uuid": "23d0563c-260d-4012-82bc-a18fd20e475f"
+  },
+  {
+    "name": "asd",
+    "image": "asd",
+    "uuid": "2bab7a29-25dd-4183-afb1-85e7f596a92d"
+  },
+  {
+    "name": "jkljl",
+    "image": "jkljkl",
+    "uuid": "5dd1e111-be24-4485-948f-8458952ef794"
+  }
+]

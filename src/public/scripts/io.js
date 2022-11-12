@@ -11,7 +11,7 @@ socket.on('GET_PRODUCTS', (p) => {
     `
 })
 
-socket.on('PRINT_MESSAGE', (message) => {
+socket.on('NEW_MESSAGE_FROM_SERVER', (message) => {
     const {email, text, date} = message
     messageContainer.innerHTML += `<li>${date}<br>${email}: ${text}`
 })
@@ -19,5 +19,5 @@ socket.on('PRINT_MESSAGE', (message) => {
 chat.addEventListener('submit', (e) => {
     e.preventDefault()
     const {email, text} = e.target
-    socket.emit('new_message', {email: email.value, text: text.value})
+    socket.emit('NEW_MESSAGE_TO_SERVER', {email: email.value, text: text.value})
 })
