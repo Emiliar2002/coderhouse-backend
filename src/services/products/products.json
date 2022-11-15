@@ -48,5 +48,10 @@
     "name": "troll",
     "image": "test",
     "uuid": "e1219ea1-c201-4ac2-b54e-1ac6a4d35aba"
+  },
+  {
+    "name": "asd",
+    "image": "asd",
+    "uuid": "b7479141-2192-4e40-8e89-841a7029bda1"
   }
 ]

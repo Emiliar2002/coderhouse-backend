@@ -5,13 +5,8 @@ const _ = require("lodash");
 
 //modulos para el server
 const express = require("express");
-const http = require("http");
-const { Server } = require("socket.io");
+const {app, server, io} = require('./src/config/http')
 
-//creacion del server
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
 
 //traigo el router
 const indexRouter = require("./src/routes/index");
