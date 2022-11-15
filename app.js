@@ -18,12 +18,12 @@ const indexRouter = require("./src/routes/index");
 
 //traigo middlewares
 const errorHandler = require("./src/middlewares/errorHandler");
+const socket = require('./src/middlewares/socketio')
+const morgan = require('morgan')
 
 //aplico middlewares
-app.use((req, res, next) => {
-  req.io = io;
-  next();
-});
+app.use(morgan('dev'))
+app.use(socket(io));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("./src/public"));
