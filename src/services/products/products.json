@@ -1,57 +1,29 @@
 [
   {
-    "name": "plancho",
-    "price": 1000,
-    "uuid": "a3ebb16e-6ec6-434b-8532-5ee3d2e83960"
+    "name": "remera",
+    "description": "es una remera que es negra",
+    "image": "https://cuestablanca.vteximg.com.br/arquivos/ids/360121-1000-1500/remera-manga-corta-negro-6.jpg?v=637801198950730000",
+    "price": "3000",
+    "stock": "20",
+    "uuid": "35cd8002-b5e0-40f6-b82d-62545b50d530",
+    "timestamp": 1668664231618
   },
   {
-    "name": "Plancha",
-    "price": 2000,
-    "uuid": "e6ef15ab-c771-4674-9fe3-5d6b767564ad"
+    "name": "escoba",
+    "description": "de paja",
+    "image": "http://www.elcaciquelimpieza.com.ar/images/default/productos/76689.jpg",
+    "price": "300",
+    "stock": "500",
+    "uuid": "eb1a8097-1bf7-4f4f-bfef-d0cb89ee298b",
+    "timestamp": 1668665922026
   },
   {
-    "name": "planchardasda",
-    "price": 1000,
-    "uuid": "23d0563c-260d-4012-82bc-a18fd20e475f"
-  },
-  {
-    "name": "asd",
-    "image": "asd",
-    "uuid": "2bab7a29-25dd-4183-afb1-85e7f596a92d"
-  },
-  {
-    "name": "jkljl",
-    "image": "jkljkl",
-    "uuid": "5dd1e111-be24-4485-948f-8458952ef794"
-  },
-  {
-    "name": "sad",
-    "image": "sdadas",
-    "uuid": "cad76055-9606-412d-b232-0adb437730ed"
-  },
-  {
-    "name": "hola",
-    "image": "XD",
-    "uuid": "7cb72d3d-62b4-4611-b9ec-c698cab7fd38"
-  },
-  {
-    "name": "hola",
-    "image": "XD",
-    "uuid": "c64f0951-b8ad-42f6-8a63-2511c48f1b31"
-  },
-  {
-    "name": "asd",
-    "image": "XD",
-    "uuid": "38928e4f-af74-4120-a807-5bd0d8d3f043"
-  },
-  {
-    "name": "troll",
-    "image": "test",
-    "uuid": "e1219ea1-c201-4ac2-b54e-1ac6a4d35aba"
-  },
-  {
-    "name": "asd",
-    "image": "asd",
-    "uuid": "b7479141-2192-4e40-8e89-841a7029bda1"
+    "name": "plato de messi",
+    "description": "plato con messi y la copa",
+    "image": "https://http2.mlstatic.com/D_NQ_NP_763787-MLA48723392137_012022-O.jpg",
+    "price": "213",
+    "stock": "1",
+    "uuid": "8a64514c-be27-4119-b98d-f1e058cb2ab1",
+    "timestamp": 1668665903132
   }
 ]

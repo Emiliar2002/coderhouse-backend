@@ -17,37 +17,30 @@
   <% if(productos.length === 0){ %>
     <h1>No hay productos para mostrar</h1>
  <% }else{ %>
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-
-      <% productos.forEach((p, i) => { %>
-        <% const active = i === 0 ? 'active' : "" %>
-        <div class="carousel-item <%=active%>">
-          <img class="d-block w-100" src="<%=p.image%>" alt="<%=p.name%>">
-          <div class="carousel-caption d-none d-md-block">
-            <h5><%=p.name%><h5>
-          </div>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+  <% productos.forEach((p, i) => { %>
+    <div class="col">
+      <div class="card h-100">
+        <img src="<%=p.image%>" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title"><%=p.name%></h5>
+          <p class="card-text">
+            <%=p.description%>
+          </p>
+          <a href="#" class="btn btn-primary delete" prodId="<%=p.uuid%>">Eliminar</a>
+          <a href="/products/edit?uuid=<%=p.uuid%>/" class="btn btn-primary">Editar</a>
         </div>
-     <% }) %>
-
+      </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+ <% }) %>
   </div>
  <% } %>
 
 
   <a href="/submit">Crear producto</a>
-
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/scripts/io.js"></script>
+  <a href="/carts">Carritos</a>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script></body>
+  <script src="/scripts/cards.js"></script>
 </html>

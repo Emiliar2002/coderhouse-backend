@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+    crossorigin="anonymous"
+  />
+  <link href="/styles/centerbody.css" rel="stylesheet" />
+  <link href="/styles/productform.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>Editar producto</title>
+</head>
+<body>
+    <body>
+        <form
+          id="formProduct"
+        >
+        <div class="form-group">
+            <label for="uuid">UUID del producto</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ingrese el nombre del producto"
+              name="uuid"
+              id="uuidInput"
+            />
+          </div>
+          <div class="form-group">
+            <label for="name">Nombre del producto</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ingrese el nombre del producto"
+              name="name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="image">Imagen</label>
+            <input
+              class="form-control"
+              placeholder="Ingrese una url"
+              name="image"
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Descripcion</label>
+            <input
+              class="form-control"
+              placeholder="Descripción..."
+              name="description"
+            />
+          </div>
+          <div class="form-group">
+            <label for="price">Precio</label>
+            <input
+              class="form-control"
+              placeholder="Precio..."
+              name="price"
+            />
+          </div>
+          <div class="form-group">
+            <label for="stock">Stock</label>
+            <input
+              class="form-control"
+              placeholder="Stock..."
+              name="stock"
+            />
+          </div>
+          <button id="submitProduct" type="submit" class="btn btn-primary">
+            Submit
+          </button>
+        </form>
+    <script src="/scripts/edit.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+</html>

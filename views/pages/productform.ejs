@@ -12,6 +12,7 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link href="/styles/centerbody.css" rel="stylesheet" />
     <link href="/styles/productform.css" rel="stylesheet" />
   </head>
@@ -20,18 +21,13 @@
 
   <body>
     <form
-      id="form"
-      enctype="multipart/x-www-form-urlencoded"
-      action="/api/productos"
-      method="POST"
+      id="formProduct"
     >
       <div class="form-group">
         <label for="name">Nombre del producto</label>
         <input
           type="text"
           class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
           placeholder="Ingrese el nombre del producto"
           name="name"
         />
@@ -40,9 +36,32 @@
         <label for="image">Imagen</label>
         <input
           class="form-control"
-          id="exampleInputPassword1"
           placeholder="Ingrese una url"
           name="image"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Descripcion</label>
+        <input
+          class="form-control"
+          placeholder="Descripción..."
+          name="description"
+        />
+      </div>
+      <div class="form-group">
+        <label for="price">Precio</label>
+        <input
+          class="form-control"
+          placeholder="Precio..."
+          name="price"
+        />
+      </div>
+      <div class="form-group">
+        <label for="stock">Stock</label>
+        <input
+          class="form-control"
+          placeholder="Stock..."
+          name="stock"
         />
       </div>
       <button id="submitProduct" type="submit" class="btn btn-primary">
@@ -57,6 +76,9 @@
         <tr>
           <th scope="col">Nombre</th>
           <th scope="col">Imagen</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Stock</th>
         </tr>
       </thead>
       <tbody id="rowContainer">
@@ -64,6 +86,9 @@
         <tr>
           <td><%=p.name%></td>
           <td><%=p.image%></td>
+          <td><%=p.description%></td>
+          <td>$<%=p.price%></td>
+          <td><%=p.stock%></td>
         </tr>
         <% }) %>
       </tbody>
@@ -73,16 +98,18 @@
       <ul id="chatMessages" class="chat_messages">
         
       </ul>
-      <input name="email" type="email" placeholder="Email..."><input name="text" type="text" placeholder="Mensaje..."><input type="submit" value="Enviar">
+      <input name="email" type="email" placeholder="Email..." required><input name="text" type="text" placeholder="Mensaje..." required><input type="submit" value="Enviar">
     </form>
 
     <a href="/">Inicio</a>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/scripts/io.js"></script>
+    <script src="/scripts/submit.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"
     ></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   </body>
 </html>
