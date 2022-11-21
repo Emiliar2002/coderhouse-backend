@@ -1,7 +1,3 @@
-const fs = require("fs");
-const jsonPath = __dirname + "/products.json";
-const _ = require("lodash");
-
 const knexConfig = require('../config');
 const knex = require('knex');
 const { v4: uuidv4 } = require('uuid');

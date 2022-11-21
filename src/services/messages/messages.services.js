@@ -1,24 +1,33 @@
-const fs = require("fs");
-const jsonPath = __dirname + "/messages.json";
-const moment = require('moment')
+
+const knexConfig = require('../database/sqlite.config');
+
 
 class MessagesService {
-  constructor() {}
+  constructor() {
+    this.knex = require('knex')(knexConfig)
+  }
+
 
   async createMessage(message) {
     try {
-        //Get current date and add it to message object
-        const date = moment().format('MMMM Do YYYY, h:mm:ss a');
-        message.date = date
+      const msgPromise = (message) => new Promise((resolve, reject) => {
+        this.knex('messages').insert(message).then(() => {
+          console.log(message)
+            resolve(message);
+        }).catch(err => {
+            reject(err)
+        }).finally(() =>{
+            this.knex.destroy();
+        });
+    })
 
+    const data = await msgPromise(message)
 
-        const data = await (await this.getMessages()).data
-        data.push(message)
-        await writeJSON(data)
-      return {
-        success: true,
-        data
-      }
+    return{
+      success: true,
+      data
+    }
+
     } catch (e) {
         console.error(e)
       return{
@@ -31,7 +40,8 @@ class MessagesService {
 
   async getMessages() {
     try {
-      const data = JSON.parse(await fs.promises.readFile(jsonPath));
+      const data = await this.knex('messages').select('*');
+      console.log(data)
       return {
         success: true,
         data: data,
@@ -45,10 +55,6 @@ class MessagesService {
     }
   }
 
-}
-
-async function writeJSON(data) {
-  await fs.promises.writeFile(jsonPath, JSON.stringify(data, null, 2));
 }
 
 module.exports = MessagesService;

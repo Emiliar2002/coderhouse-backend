@@ -18,8 +18,8 @@ socket.on('GET_PRODUCTS', (p) => {
 })
 
 socket.on('NEW_MESSAGE_FROM_SERVER', (message) => {
-    const {email, text, date} = message
-    messageContainer.innerHTML += `<li>${date}<br>${email}: ${text}`
+    const {email, text, created_at} = message
+    messageContainer.innerHTML += `<li>${created_at}<br>${email}: ${text}`
 })
 
 chat.addEventListener('submit', (e) => {
