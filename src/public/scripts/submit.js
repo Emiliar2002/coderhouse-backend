@@ -21,7 +21,7 @@ formProduct.addEventListener('submit', async (e) => {
     console.log(res)
     if(res.success){
         Toastify({
-            text: `Producto creado con el id ${res.data.uuid}`,
+            text: `Producto creado con el código ${res.data.code}`,
             duration: 3000,
             close: true,
             gravity: "bottom",
@@ -35,7 +35,7 @@ formProduct.addEventListener('submit', async (e) => {
     }
     else{
         Toastify({
-            text: `Error: ${res.message}`,
+            text: `Error: ${res.data}`,
             duration: 3000,
             close: true,
             gravity: "bottom",

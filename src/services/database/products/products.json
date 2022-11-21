@@ -25,5 +25,14 @@
     "stock": "1",
     "uuid": "8a64514c-be27-4119-b98d-f1e058cb2ab1",
     "timestamp": 1668665903132
+  },
+  {
+    "name": "asd",
+    "description": "ascdasd",
+    "image": "asd",
+    "price": "1000",
+    "stock": "30",
+    "uuid": "b4782c8a-9551-415d-96a1-b04c7390ef99",
+    "timestamp": 1669016118286
   }
 ]

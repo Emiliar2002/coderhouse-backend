@@ -1,6 +1,6 @@
 const fs = require("fs");
 const jsonPath = __dirname + "/carritos.json";
-const ProductService = require('../products/products.services')
+const ProductService = require("../database/products/products.services");
 const { v4: uuidv4 } = require("uuid");
 const productService = new ProductService()
 

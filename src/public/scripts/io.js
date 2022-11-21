@@ -6,7 +6,7 @@ const messageContainer = document.getElementById('chatMessages')
 socket.on('GET_PRODUCTS', (p) => {
     const row = document.createElement('tr')
     for(property in p){
-        if(property !== 'timestamp' && property !== 'uuid'){
+        if(property !== 'timestamp' && property !== 'code'){
             const cell = document.createElement('td')
             if(property === 'price') cell.innerHTML =`$${p[property]}`
             else cell.innerHTML = p[property]

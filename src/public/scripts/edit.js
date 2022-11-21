@@ -1,10 +1,10 @@
-const uuidInput = document.getElementById('uuidInput')
+const codeInput = document.getElementById('codeInput')
 const formProduct = document.getElementById('formProduct')
 
 const url_string = window.location.href;
 const url = new URL(url_string);
-const uuid = url.searchParams.get("uuid").split('/')[0];
-if(uuid && uuid.length !== 0) uuidInput.value = uuid
+const code = url.searchParams.get("code").split('/')[0];
+if(code && code.length !== 0) codeInput.value = code
 
 formProduct.addEventListener('submit', async (e) => {
     e.preventDefault()
@@ -12,11 +12,11 @@ formProduct.addEventListener('submit', async (e) => {
     let reqBody = {}
     for (let i = 0; i < inputs.length; i++) {
         const input = inputs[i];
-        if(input.value !== "" && input.name !== uuid){
+        if(input.value !== "" && input.name !== code){
             reqBody[input.name] = input.value
         }
     }
-    const rawRes = await fetch('/api/productos/' + uuidInput.value, {
+    const rawRes = await fetch('/api/productos/' + codeInput.value, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -29,7 +29,7 @@ formProduct.addEventListener('submit', async (e) => {
     const res = await rawRes.json()
     if(res.success){
         Toastify({
-            text: `Producto ${res.data.uuid} actualizado`,
+            text: res.data,
             duration: 3000,
             close: true,
             gravity: "bottom",
