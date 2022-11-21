@@ -5,7 +5,7 @@ const _ = require("lodash");
 
 //modulos para el server
 const express = require("express");
-const {app, server, io} = require('./src/config/http')
+const {app, server, io} = require('./src/config/http');
 
 
 //traigo el router
