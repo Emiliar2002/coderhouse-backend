@@ -13,6 +13,8 @@ const getModule = async (name) => {
     return ModuleSource.default
 }
 
+
+//si quiero el dao de productos entonces await Daos('products') o para el de carritos await Daos('carts')
 const Daos = async (table) => {
     const DaosClass = await getModule(table);
     const DaosInstance = new DaosClass()    
