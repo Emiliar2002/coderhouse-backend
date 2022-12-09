@@ -9,7 +9,6 @@ const getModule = async (name) => {
         const split = i.split('.')
         if(split[0] === dataCore) ModuleSource = await import(`./${name}/${i}`)
     }
-    console.log(ModuleSource)
     return ModuleSource.default
 }
 
