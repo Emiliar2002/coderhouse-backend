@@ -1,4 +1,4 @@
-const {getFirebaseConfig} = require('../config')
+import { getFirebaseConfig } from "../config.js";
 
 class firebaseProducts {
   constructor() {

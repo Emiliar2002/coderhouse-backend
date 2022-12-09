@@ -1,7 +1,7 @@
 
-const fs = require("fs");
+import fs from 'fs'
 const jsonPath = __dirname + "/storage/fs.json";
-const _ = require("lodash");
+import _ from 'lodash'
 
 class fsCarts {
   constructor() {}

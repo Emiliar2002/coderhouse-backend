@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const {getMongoCreds} = require('../config')
+import mongoose from 'mongoose'
+import { getMongoCreds } from "../config.js";
+import { v4 } from 'uuid';
 
 class mongoCarts {
   constructor() {
