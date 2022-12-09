@@ -8,9 +8,8 @@ class mongoCarts {
 
     // Define the schema for cart documents
     this.CartSchema = new mongoose.Schema({
-      name: { type: String, required: true },
-      description: { type: String, required: true },
-      price: { type: Number, required: true },
+      products: {type: Array, required:true},
+      code: {type: String, required:true}
     });
 
     // Create a model for cart documents
@@ -65,7 +64,7 @@ class mongoCarts {
 
   async createCart(data) {
     // Create a new cart document
-    const cart = new this.Cart(data);
+    const cart = new this.Cart({...data, code: v4()});
 
     // Save the cart to the database
     await cart.save();
