@@ -4,11 +4,12 @@ const getModule = async (name) => {
     const dataCore = process.env.DATACORE
 
     const dir = await fs.readdir(__dirname + '/' + name)
-    let ModuleSource = await import(__dirname + '/products/memory.products.mjs')
-    dir.forEach(async (i) => {
+    let ModuleSource = await import(`./${name}/memory.${name}.mjs`)
+    for(let i of dir){
         const split = i.split('.')
-        if(split[0] === dataCore) ModuleSource = await import (__dirname + `/${dir}/${i}`)
-    })
+        if(split[0] === dataCore) ModuleSource = await import(`./${name}/${i}`)
+    }
+    console.log(ModuleSource)
     return ModuleSource.default
 }
 

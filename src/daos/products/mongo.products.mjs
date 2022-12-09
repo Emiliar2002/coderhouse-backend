@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const {getMongoCreds} = require('../config')
+import mongoose from 'mongoose'
+import { getMongoCreds } from "../config.js";
+import { v4 } from 'uuid';
 
 class mongoProducts {
   constructor() {
@@ -8,8 +9,11 @@ class mongoProducts {
     // Define the schema for product documents
     this.ProductSchema = new mongoose.Schema({
       name: { type: String, required: true },
+      image: { type: String, required: true },
+      code : { type: String, required: true },
       description: { type: String, required: true },
       price: { type: Number, required: true },
+      stock: { type: Number, required: true },
     });
 
     // Create a model for product documents
@@ -64,7 +68,10 @@ class mongoProducts {
 
   async createProduct(data) {
     // Create a new product document
-    const product = new this.Product(data);
+    const product = new this.Product({
+      ...data,
+      code: v4()
+    });
 
     // Save the product to the database
     await product.save();
