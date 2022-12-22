@@ -1,10 +1,10 @@
 
-const knexConfig = require('../database/sqlite.config');
+// const knexConfig = require('../database/sqlite.config');
 
 
 class MessagesService {
   constructor() {
-    this.knex = require('knex')(knexConfig)
+    // this.knex = require('knex')(knexConfig)
   }
 
 

@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const router = Router();
-const CartService = require("../../../services/carrito/carrito.services");
-const cartService = new CartService;
+// const CartService = require("../../../services/carrito/carrito.services");
+// const cartService = new CartService;
 const _ = require('lodash')
 
 router.post("/", async (_req, res, next) => {

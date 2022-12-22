@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const _ = require("lodash");
-const ProductService = require("../../../services/database/products/products.services");
+const ProductService = require("../../../services/products/products.services");
 const {isAdmin} = require('../../../controllers/authController')
 
 const productService = new ProductService();
