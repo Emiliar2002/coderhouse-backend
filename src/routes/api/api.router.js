@@ -3,12 +3,14 @@ const router = Router()
 
 const productosRouter = require('./productos/productos.router')
 const carritoRouter = require('./carrito/carrito.router')
+const productosTestRouter = require('./productos-test/productos-test.router')
 
 require('dotenv').config()
 
 router
 .use('/productos', productosRouter)
 .use('/carrito', carritoRouter)
+.use('/productos-test', productosTestRouter)
 .all('/*', (req, res) => {
     const {method, originalUrl} = req
     res.status(404).json({
