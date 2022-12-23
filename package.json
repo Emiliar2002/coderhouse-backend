@@ -30,6 +30,7 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.20",
+    "normalize-mongoose": "^1.0.0",
     "socket.io": "^4.5.3",
     "sqlite3": "^5.1.2",
     "uuid": "^9.0.0"

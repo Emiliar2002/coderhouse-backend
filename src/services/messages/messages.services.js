@@ -1,56 +1,45 @@
 
-// const knexConfig = require('../database/sqlite.config');
-
-
+const Daos = require("../../daos")('messages');
 class MessagesService {
-  constructor() {
-    // this.knex = require('knex')(knexConfig)
+
+  constructor(){
+    Daos.then((r) =>{
+      r.connect()
+      this.connection = r
+    })
   }
 
 
   async createMessage(message) {
-    try {
-      const msgPromise = (message) => new Promise((resolve, reject) => {
-        this.knex('messages').insert(message).then(() => {
-          console.log(message)
-            resolve(message);
-        }).catch(err => {
-            reject(err)
-        }).finally(() =>{
-            this.knex.destroy();
-        });
-    })
-
-    const data = await msgPromise(message)
-
-    return{
-      success: true,
-      data
-    }
-
-    } catch (e) {
-        console.error(e)
-      return{
-        success: false,
-        message: e.message
+    try{
+      const data = await this.connection.createMessage(message)
+      return {
+        success: true,
+        data
       }
-    }
+      }catch(e){
+        console.error(e.message)
+        return {
+          success: false,
+          data: e.message
+        }
+      }
     
   }
 
   async getMessages() {
-    try {
-      const data = await this.knex('messages').select('*');
-      console.log(data)
+    try{
+    const data = await this.connection.getMessages()
+    console.log(data)
+    return {
+      success: true,
+      data
+    }
+    }catch(e){
+      console.error(e)
       return {
-        success: true,
-        data: data,
-      }
-    } catch (e) {
-        console.error(e)
-      return{
         success: false,
-        message: e.message
+        data: e.message
       }
     }
   }

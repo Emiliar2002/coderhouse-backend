@@ -1,11 +1,13 @@
 const {Router} = require('express')
 const router = Router()
-const ProductService = require('../../services/products/products.services')
-const productService = new ProductService()
+const MockProductService = require('../../services/mock/products/products.mock')
+const productService = new MockProductService()
+
+
 
 router.get('/', async (_req, res, next) => {
     try{
-        const data = await productService.getProducts()
+        const data = await productService.getFakeProducts()
         if(!data.success) return res.status(500).json({success: false, data})
         res.render('productform', {data})
     }catch(e){

@@ -44,9 +44,6 @@ io.on("connection", async (socket) => {
   });
 
   socket.on("NEW_MESSAGE_TO_SERVER", async (message) => {
-    const { email, text } = message;
-    if (email.length === 0 || text.length === 0) return;
-
     await messagesService.createMessage(message);
     io.sockets.emit("NEW_MESSAGE_FROM_SERVER", message);
   });

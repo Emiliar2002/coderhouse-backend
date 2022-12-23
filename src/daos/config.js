@@ -8,7 +8,12 @@ dotenv.config();
 
 const getMongoCreds = () => {
     const {MONGODB_URL, MONGODB_USER, MONGODB_PASSWORD, MONGODB_DB} = process.env
-    const connectionString = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_URL}/${MONGODB_DB}?retryWrites=true&w=majority`
+    let {MONGODB_PORT} = process.env
+    MONGODB_PORT = parseInt(MONGODB_PORT)
+    const connectionString = !isNaN(MONGODB_PORT) ? 
+    `mongodb://${MONGODB_URL}:${MONGODB_PORT}/${MONGODB_DB}` 
+    : 
+    `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_URL}/${MONGODB_DB}?retryWrites=true&w=majority`
     return connectionString
 }
 
