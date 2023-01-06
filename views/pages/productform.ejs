@@ -20,6 +20,15 @@
   <% productos = data.data %>
 
   <body>
+    <%if(user){ %>
+      <h1>¡Bienvenido <%=user%>!</h1>
+      <button id="logoutButton" type="button">Logout</button>
+   <% }else{ %>
+    <form id="loginForm">
+      <input name="user" type="text" placeholder="Username..." required>
+      <input type="submit" value="Login">
+    </form>
+  <% }%>
     <form
       id="formProduct"
     >

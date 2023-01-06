@@ -1,4 +1,33 @@
 const formProduct = document.getElementById('formProduct')
+const formLogin = document.getElementById('loginForm')
+const logoutButton = document.getElementById('logoutButton')
+
+
+if(logoutButton){
+  logoutButton.addEventListener('click', async () => {
+    location.replace(window.location.protocol+'//' + window.location.host+'/logout')
+  })
+}
+
+if(formLogin){
+
+
+formLogin.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const {user} = e.target
+    await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            user: user.value
+          })
+    })
+    location.reload()
+  })
+}
 
 formProduct.addEventListener('submit', async (e) => {
     e.preventDefault()

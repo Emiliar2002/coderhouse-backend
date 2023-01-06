@@ -19,6 +19,7 @@ const socket = require('./src/middlewares/socketio')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
+const bodyParser = require('body-parser')
 
 //aplico middlewares
 app.use(morgan('dev'))
@@ -28,6 +29,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("./src/public"));
 app.use(session(sessionConfig))
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
 
 //INDEX ROUTER//
 app.use("/", indexRouter);

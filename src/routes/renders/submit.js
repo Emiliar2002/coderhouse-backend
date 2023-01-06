@@ -5,11 +5,15 @@ const productService = new MockProductService()
 
 
 
-router.get('/', async (_req, res, next) => {
+router.get('/', async (req, res, next) => {
     try{
+        const {user} = req.session
+        if(user){
+            req.ttl = 60
+        }
         const data = await productService.getFakeProducts()
         if(!data.success) return res.status(500).json({success: false, data})
-        res.render('productform', {data})
+        res.render('productform', {data, user})
     }catch(e){
         next(e)
     }
