@@ -13,7 +13,7 @@ const getMongoCreds = () => {
     const connectionString = !isNaN(MONGODB_PORT) ? 
     `mongodb://${MONGODB_URL}:${MONGODB_PORT}/${MONGODB_DB}` 
     : 
-    `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_URL}/${MONGODB_DB}?retryWrites=true&w=majority`
+    `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_DB}.${MONGODB_URL}?retryWrites=true&w=majority`
     return connectionString
 }
 
